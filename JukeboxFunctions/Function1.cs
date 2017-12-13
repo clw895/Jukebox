@@ -10,7 +10,7 @@ using Microsoft.Azure.WebJobs.Host;
 
 namespace JukeboxFunctions
 {
-    public static class ReplyToJukeboxRequest
+    public static class Function1
     {
         [FunctionName("ReplyToJukeboxRequest")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
@@ -22,10 +22,8 @@ namespace JukeboxFunctions
 
         public static HttpResponseMessage GetTwilioResponse()
         {
-            string body = "Thanks for sending your request. We will reply to your request shortly";
-
             var twilioResponse = new MessagingResponse();
-            twilioResponse.Append(new Message(body));
+            twilioResponse.Append(new Message("Thanks for sending your request. We will reply to your request shortly"));
 
             var httpResponseMessage = new HttpResponseMessage();
             httpResponseMessage.Content = new StringContent(twilioResponse.ToString());
